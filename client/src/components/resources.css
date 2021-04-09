@@ -1,0 +1,45 @@
+#resources{
+    background-color: rgb(28, 97, 202);
+    display: flex;  
+    flex-wrap: wrap;
+    color: white;
+    overflow: auto;
+    width: 25%;
+    /* position: absolute; */
+    /* top: 0px;
+    right: 0; */
+    margin-left: 0px;
+    border: 3px solid #73AD21;
+}
+
+#courses{
+    background-color: lightblue;
+}
+
+#needToTake{
+    background-color: rgb(91, 178, 207);
+}
+
+#aTag{
+    background-color: blue;
+    width: 95%;
+    color: white;
+    padding: 0em 1em;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 3px solid #4360e4;
+}
+#aTag:hover {
+    background-color: #555;
+  }
+#aTag:active {
+    background-color:  #555;
+  }
+
+#previousCourses{
+    background-color: lightblue;
+}
+  
+/* #aTag:visited {
+    background-color: #ccc;
+  } */
