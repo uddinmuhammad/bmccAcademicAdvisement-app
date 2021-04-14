@@ -6,17 +6,17 @@ var CoursesCurrentRouter = express.Router();
 let courses = [
     {
         id: 1,
-        name: "Programing",
+        title: "Programing",
         credits: 3
       },
       {
         id: 2,
-        name: "English",
+        title: "English",
         credits: 3
       },
       {
         id: 3,
-        name: "Speech",
+        title: "Speech",
         credits: 3
       }
 ]

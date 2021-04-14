@@ -8,7 +8,7 @@ export default class CoursesCurrent extends Component {
         coursesCurrent: [
           {
             id: 123,
-            name: "NOCOURSE",
+            title: "NOCOURSE",
             credits: 3
           }
         ]

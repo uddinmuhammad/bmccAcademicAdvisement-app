@@ -6,7 +6,7 @@ export default class CoursesTaken extends Component {
         coursesTaken: [
             {
                 id: 786,
-                courseTitle: "No Course has been Taken"
+                title: "No Course has been Taken"
             }
         ]
     };
@@ -27,7 +27,7 @@ export default class CoursesTaken extends Component {
                 <h5>Courses Taken</h5>
                 {this.state.coursesTaken.map(course => (
                     <div key={course.id}>
-                         {course.courseTitle} - {course.courseCode} - {course.credits}
+                         {course.title} - {course.code} - {course.credits}
                     </div>
                 ))}
             </div>

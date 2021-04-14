@@ -6,7 +6,7 @@ export default class CoursesNextSemester extends Component {
         courses:[
             {
                 id: 567,
-                courseTitle: "NO COURSES Left",
+                title: "NO COURSES Left",
                 credit: 0,
                 crucial: true,
                 important: true,
@@ -51,7 +51,7 @@ export default class CoursesNextSemester extends Component {
                     <h5>Crucial Courses</h5>
                 {this.state.courses.filter(course => course.crucial).map(course => (
                     <div key={course.id}> 
-                        {course.courseTitle} - {course.courseCode} - {course.credits}
+                        {course.title} - {course.code} - {course.credits}
                     </div>
                 ))}
                 </div>
@@ -61,7 +61,7 @@ export default class CoursesNextSemester extends Component {
                 {/* Rendering Importants */}
                 {this.state.courses.filter(course => course.important).map(course => (
                     <div key={course.id}>
-                        {course.courseTitle} - {course.courseCode} - {course.credits}
+                        {course.title} - {course.code} - {course.credits}
                     </div>
                 ))}
                 </div>
@@ -71,7 +71,7 @@ export default class CoursesNextSemester extends Component {
                 {/* Rendering ShouldTake */}
                 {this.state.courses.filter(course => course.shouldTake).map(course => (
                     <div key={course.id}>
-                        {course.courseTitle} - {course.courseCode} - {course.credits}
+                        {course.title} - {course.code} - {course.credits}
                     </div>
                 ))}
                 </div>               

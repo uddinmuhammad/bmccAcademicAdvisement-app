@@ -1,44 +1,57 @@
 // import express from 'express';
 const express = require('express');
+const allCourse = require('../models/MajorCourses');
 
 var coursesRequiredRouter = express.Router();
 
 let courses = [
-    {id: 1,
-        courseTitle: "University Physics",
-        courseCode: "PHY-221",
+    {
+        title: "University Physics",
+        code: "PHY-221",
         credits: 4
     },
-    {id: 2,
-        courseTitle: "Analytics Geometry & Calculus II",
-        courseCode: "MAT-302",
+    {
+        title: "Analytics Geometry & Calculus II",
+        code: "MAT-302",
         credits: 4
     },
-    {id: 3,
-        courseTitle: "Anvanced Programing Techniquies",
-        courseCode: "CSC-211",
+    {
+        title: "Anvanced Programing Techniquies",
+        code: "CSC-211",
         credits: 3
     },
-    {id: 4,
-        courseTitle: "Discrete Structure and Applications to Computer Science",
-        courseCode: "CSC-231",
+    {
+        title: "Discrete Structure and Applications to Computer Science",
+        code: "CSC-231",
         credits: 3
     },
-    {id: 5,
-        courseTitle: "Fundamentals of Computer Systems",
-        courseCode: "CSC-215",
+    {
+        title: "Fundamentals of Computer Systems",
+        code: "CSC-215",
         credits: 3
     },
-    {id: 6,
-        courseTitle: "Data Structures",
-        courseCode: "CSC-331",
+    {
+        title: "Data Structures",
+        code: "CSC-331",
         credits: 3
     }
 ]
 
 coursesRequiredRouter.get('/coursesRequired', (req, res) => {
+
+    allCourse.insertMany(courses)
+    .then(res => {
+        console.log('All courses inserted... ' + res)
+    })
+    .catch(e => {
+        console.log(e)
+    });
+
     res.json(courses);
 });
+
+
+
 
 // export default coursesRequiredRouter;
 

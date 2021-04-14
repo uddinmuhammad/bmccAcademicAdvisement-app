@@ -7,7 +7,7 @@ export default class CoursesRequired extends Component {
             coursesRequired: [    
                 {
                     id: 1234,
-                    courseTitle: "NO MORE COURSE IS Required"
+                    title: "NO MORE COURSE IS Required"
                 }
             ]
         };
@@ -29,7 +29,7 @@ export default class CoursesRequired extends Component {
                 <h5>Courses Needed</h5>
                 {this.state.coursesRequired.map(course => (
                     <div key={course.id}>
-                        {course.courseTitle} - {course.courseCode} - {course.credits}
+                        {course.title} - {course.code} - {course.credits}
                     </div>
                 ))}
             </div>
