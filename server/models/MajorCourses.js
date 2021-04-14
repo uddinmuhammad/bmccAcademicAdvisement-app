@@ -17,7 +17,7 @@ const courseSchema = new mongoose.Schema({
     }
 })
 
-courseTable = mongoose.model('MajorCourses',courseSchema);
+const MajorCourses = mongoose.model('MajorCourses',courseSchema);
 
 // module.exports={
      
@@ -33,5 +33,4 @@ courseTable = mongoose.model('MajorCourses',courseSchema);
 
 // const allCourse = mongoose.model('Course', courseSchema)
 
-export default allCourse;
-// module.exports = allCourse;
+module.exports = MajorCourses;

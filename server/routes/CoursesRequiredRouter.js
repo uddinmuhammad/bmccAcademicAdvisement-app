@@ -39,15 +39,41 @@ let courses = [
 
 coursesRequiredRouter.get('/coursesRequired', (req, res) => {
 
-    allCourse.insertMany(courses)
-    .then(res => {
-        console.log('All courses inserted... ' + res)
-    })
-    .catch(e => {
-        console.log(e)
-    });
+    // allCourse.insertMany(courses)
+    // .then(res => {
+    //     console.log('All courses inserted... ' + res)
+    // })
+    // .catch(e => {
+    //     console.log(e)
+    // });
 
-    res.json(courses);
+    // allCourse.find({}, (err, courses) => {
+
+    //     if ( err ) {
+    //         console.log('Error occured while getting records');
+    //         res.json(err);
+    //     } else {
+
+    //         courseMap = {}
+
+    //         courses.forEach(function(course) {
+    //         courseMap[course._id] = course;
+    //       });
+          
+    //       res.send(courses); 
+
+    //     }
+
+    // })
+
+    allCourse.findOne({title: "University Physics"}, (err, result) => {
+        if ( err ) {
+            console.log('Error occured while getting records');
+            res.json(err);
+        } else {
+            res.send(result);
+        }
+    })
 });
 
 
