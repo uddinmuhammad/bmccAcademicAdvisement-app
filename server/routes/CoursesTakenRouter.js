@@ -1,45 +1,54 @@
-// import express from 'express';
 const express = require('express');
+const Courses = require('../models/CourseModel');
+const StudentCourses = require('../models/StudentCoursesModel');
 
-var coursesTakenRouter = express.Router();
 
-let courses = [
-    {id: 1,
-        title: "Intermediate Algebra and Precalculus",
-        code: "MAT-206.5",
-        credits: 4
-    },
-    {id: 2,
-        title: "English Composition",
-        code: "ENG-101",
-        credits: 3
-    },
-    {id: 3,
-        title: "Principles in Information Technology and Computation",
-        code: "CSC-101",
-        credits: 3
-    },
-    {id: 4,
-        title: "Discrete Structure and Applications to Computer Science",
-        code: "CSC-231",
-        credits: 3
-    },
-    {id: 5,
-        title: "Fundamentals of Computer Systems",
-        code: "CSC-215",
-        credits: 3
-    },
-    {id: 6,
-        title: "Data Structures",
-        code: "CSC-331",
-        credits: 3
+var CoursesTakenRouter = express.Router();
+
+async function getMajorTakenCourses(courses){
+    let takenCourses;
+
+        takenCourses = courses.filter(course => course.grade < 13);
+        return takenCourses;
+
+}
+
+
+
+
+
+CoursesTakenRouter.get('/coursesTaken', async (req, res) => {
+
+    const student = await StudentCourses.findOne({"student": '607e853523cd756ff31227d5'})
+
+    if(!student) res.json('there is no student')
+    else{
+        const majorCourses = await getMajorTakenCourses(student.courses);
+        const englishCourses =  await getMajorTakenCourses(student.englishCourses);
+
+        const creativeExpressionCourses = await getMajorTakenCourses(student.creativeExpressionCourses);
+        const individualAndSocietyCourses = await getMajorTakenCourses(student.individualAndSocietyCourses);
+        const usExperienceCourses = await getMajorTakenCourses(student.usExperienceInItsDiversityCourses);
+        const worldCulturesCourses = await getMajorTakenCourses(student.worldCulturesAndGlobalIssuesCourses);
+
+        let newUntakenCourses;
+
+
+        newUntakenCourses = majorCourses.concat(englishCourses
+            .concat(creativeExpressionCourses
+                .concat(individualAndSocietyCourses
+                    .concat(usExperienceCourses
+                        .concat(worldCulturesCourses)))));
+
+
+        const coursesDetails = [];
+  
+        for(course of newUntakenCourses){
+            coursesDetails.push(await Courses.findById(course.course));
+        }
+
+        res.json(coursesDetails);
     }
-]
-
-coursesTakenRouter.get('/coursesTaken', (req, res) => {
-    res.json(courses);
 });
 
-// export default coursesTakenRouter;
-
-module.exports = coursesTakenRouter;
+module.exports = CoursesTakenRouter;

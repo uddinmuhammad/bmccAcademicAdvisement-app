@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-
+import config from '../config/app_config.json';
 export default class CoursesTaken extends Component {
     state = {
         coursesTaken: [
@@ -12,7 +12,9 @@ export default class CoursesTaken extends Component {
     };
 
     componentDidMount = () => {
-        axios.get("/api/coursesTaken").then(response => {
+        var URI = config.base_url+config.courses_Taken
+
+        axios.get(URI).then(response => {
             // console.log(response.data);
             this.setState({
                 coursesTaken: response.data

@@ -9,8 +9,8 @@ export default class CourseCurrent extends Component {
             <hr />
               {courses.map((course) => {
                 return (
-                  <div key={course.id}>
-                      <li > {course.title}</li>
+                  <div className="container" id="needToTake" key={course.id}>
+                      {course.title} - {course.code} - {course.credits}
                   </div>
                 );
               })}

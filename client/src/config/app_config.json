@@ -1,0 +1,7 @@
+{
+    "base_url": "http://localhost:4000",
+    "courses_required": "/api/coursesRequired",
+    "courses_current":"/api/coursesCurrent",
+    "courses_NextSemester": "/api/coursesNextSemester",
+    "courses_Taken": "/api/coursesTaken"
+}

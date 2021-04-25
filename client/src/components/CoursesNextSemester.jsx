@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import config from '../config/app_config.json';
 
 export default class CoursesNextSemester extends Component {
     state = {
         courses:[
             {
+                _doc:{
                 id: 567,
                 title: "NO COURSES Left",
-                credit: 0,
+                credit: 0,},
                 crucial: true,
                 important: true,
                 shouldTake: true
@@ -16,7 +18,9 @@ export default class CoursesNextSemester extends Component {
     };
 
     componentDidMount = () => {
-        axios.get("/api/coursesNextSemester").then(response => {
+        var URI = config.base_url+config.courses_NextSemester;
+
+        axios.get(URI).then(response => {
             // console.log(response.data);
             this.setState({
                 courses: response.data
@@ -51,7 +55,7 @@ export default class CoursesNextSemester extends Component {
                     <h5>Crucial Courses</h5>
                 {this.state.courses.filter(course => course.crucial).map(course => (
                     <div key={course.id}> 
-                        {course.title} - {course.code} - {course.credits}
+                        {course._doc.title} - {course._doc.code} - {course._doc.credits}
                     </div>
                 ))}
                 </div>

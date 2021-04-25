@@ -1,5 +1,8 @@
 // import express from 'express';
 const express = require('express');
+const Courses = require('../models/CourseModel');
+const StudentCourses = require('../models/StudentCoursesModel');
+
 var coursesNextSemesterRouter = express.Router();
 
 let courses = [
@@ -45,8 +48,42 @@ let courses = [
     }
 ]
 
-coursesNextSemesterRouter.get('/coursesNextSemester', (req, res) => {
-    res.json(courses);
+
+
+
+coursesNextSemesterRouter.get('/coursesNextSemester', async (req, res) => {
+    const student = await StudentCourses.findOne({"student": '607e853523cd756ff31227d5'});
+
+    const majorCourses = student.courses;
+    
+    untakenMajorCourses = majorCourses.filter(course => course.grade >= 9 && course.grade != 14);
+
+    const coursesDetails = [];
+    const c = {crucial: true};
+
+    for(course of untakenMajorCourses){
+        coursesDetails.push(await Courses.findById(course.course));
+    }
+
+    // for(course of coursesDetails){
+    //     course = {...course, ...c};
+    //     //console.log(course)
+    //     course.save();
+    // }
+
+    var result = coursesDetails.map(function(el) {
+        var o = Object.assign({}, el);
+        o.crucial = true;
+        return o;
+      })
+      
+    //   console.log(coursesDetails);
+    //   console.log(result);
+
+
+    res.json(result)
+     //console.log(coursesDetails);
+
 });
 
 // export default coursesNextSemesterRouter;

@@ -1,29 +1,27 @@
-// import express from 'express';
-// import myCourses from '../../client/src/components/myCourses';
+
 const express = require('express');
 var CoursesCurrentRouter = express.Router();
+const Courses = require('../models/CourseModel');
+const StudentCourses = require('../models/StudentCoursesModel');
 
-let courses = [
-    {
-        id: 1,
-        title: "Programing",
-        credits: 3
-      },
-      {
-        id: 2,
-        title: "English",
-        credits: 3
-      },
-      {
-        id: 3,
-        title: "Speech",
-        credits: 3
+
+CoursesCurrentRouter.get('/CoursesCurrent', async (req, res) => {
+  const student = await StudentCourses.findOne({"student": '607e853523cd756ff31227d5'})
+
+  if(!student) res.json('there is no student')
+  else{
+      const courses = student.courses;
+      const takingCourses = courses.filter(course => course.grade > 13);
+
+
+      const coursesDetails = [] 
+
+      for(course of takingCourses){
+          coursesDetails.push(await Courses.findById(course.course));
       }
-]
-
-CoursesCurrentRouter.get('/CoursesCurrent', (req, res) => {
-    res.json(courses);
+      res.json(coursesDetails);
+  }
 });
 
-// export default CoursesCurrentRouter;
+
 module.exports = CoursesCurrentRouter;

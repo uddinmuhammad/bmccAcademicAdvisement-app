@@ -9,7 +9,8 @@ const CoursesCurrent = require ('./routes/CoursesCurrentRouter.js');
 const CoursesNextSemesterRouter = require ('./routes/CoursesNextSemesterRouter.js');
 const CoursesRequiredRouter = require ('./routes/CoursesRequiredRouter.js');
 const CoursesTakenRouter = require ('./routes/CoursesTakenRouter.js');
-
+const StudentDetailsRouter = require('./routes/student/StudentDetailsRouter');
+const StudentCoursesRouter = require('./routes/student/StudentCoursesRouter');
 
 const app = express();
 app.use(cors());
@@ -17,7 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({
     extended: true
   }));
-
+  
 
 connectDB();
 
@@ -26,7 +27,8 @@ app.use('/api', CoursesRequiredRouter);
 app.use('/api', CoursesCurrent);
 app.use('/api', CoursesTakenRouter);
 app.use('/api', CoursesNextSemesterRouter);
-app.use('/api', require ('./routes/fetchRouter.js'));
+app.use('/api', StudentDetailsRouter);
+app.use('/api', StudentCoursesRouter);
 
 app.get('/', (req, res) => res.send('API Running'));
 const PORT = process.env.PORT;
