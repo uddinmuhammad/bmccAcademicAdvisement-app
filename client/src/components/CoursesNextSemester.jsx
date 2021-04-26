@@ -65,7 +65,7 @@ export default class CoursesNextSemester extends Component {
                 {/* Rendering Importants */}
                 {this.state.courses.filter(course => course.important).map(course => (
                     <div key={course.id}>
-                        {course.title} - {course.code} - {course.credits}
+                        {course._doc.title} - {course._doc.code} - {course._doc.credits}
                     </div>
                 ))}
                 </div>
@@ -75,7 +75,7 @@ export default class CoursesNextSemester extends Component {
                 {/* Rendering ShouldTake */}
                 {this.state.courses.filter(course => course.shouldTake).map(course => (
                     <div key={course.id}>
-                        {course.title} - {course.code} - {course.credits}
+                        <h6>{course.title} - <i>{course.credits}</i></h6>
                     </div>
                 ))}
                 </div>               

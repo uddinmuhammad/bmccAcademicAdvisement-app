@@ -1,19 +1,20 @@
-// import express from 'express';
 const express = require('express');
-const {CoursesRequired, studentCoursesRequired} = require('../services/CoursesRequiredService');
-const Courses = require('../models/CourseModel');
-const mongoose = require('mongoose');
-const toId = mongoose.Types.ObjectId;
+const {CoursesRequired} = require('../services/CoursesRequiredService');
+
 
 const CoursesRequiredRouter = express.Router();
-const StudentCoursesRequiredRouter = express.Router();
-const addPreReqRoute = express.Router();
-const addCoReqRoute = express.Router();
-
-
 
 CoursesRequiredRouter.get('/coursesRequired', CoursesRequired);
-StudentCoursesRequiredRouter.get('/studentCoursesRequired', studentCoursesRequired);
+
+module.exports = CoursesRequiredRouter;
+
+
+
+/**Data Populating Code**/
+// const mongoose = require('mongoose');
+// const toId = mongoose.Types.ObjectId;
+// const addPreReqRoute = express.Router();
+// const addCoReqRoute = express.Router();
 // individualAndSocietyCoursesRouter.get('/individualAndSocietyCourses', individualAndSocietyCourses);
 
 // addPreReqRoute.get("/addPreReq/:course/:preReq", async (req, res) => {
@@ -38,7 +39,5 @@ StudentCoursesRequiredRouter.get('/studentCoursesRequired', studentCoursesRequir
 
 
 // export default coursesRequiredRouter;
-
 // module.exports = addPreReqRoute;
-module.exports = CoursesRequiredRouter;
 // module.exports = StudentCoursesRequiredRouter

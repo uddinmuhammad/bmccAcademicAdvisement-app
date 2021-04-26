@@ -8,31 +8,6 @@ const toId = mongoose.Types.ObjectId;
 let StudentDetailsRouter = express.Router();
 
 
-
-// let students = [
-//     {
-//     emplId: 12345678,
-//     name:{
-//         firstName: "John",
-//         lastName: "Doe"
-//     },
-//     email: "johndoe@bmcc.com",
-//     phoneNumber: 1234567890,
-//     major: 'CS',
-//     },
-//     {
-//         emplId: 12345678,
-//         name:{
-//             firstName: 'John',
-//             lastName: 'Doe'
-//         },
-//         email: 'johndoe@bmcc.com',
-//         phoneNumber: 1234567890,
-//         major: 'CIS',
-//         },
-
-// ]
-
 StudentDetailsRouter.get('/studentdetails', (req, res) => {
 
     // Students.find({major: 'CS'})

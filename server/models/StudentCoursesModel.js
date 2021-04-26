@@ -45,7 +45,7 @@ const studentCoursesSchema = mongoose.Schema({
     ],
     worldCulturesAndGlobalIssuesCourses:[
         {
-            course: {type: mongoose.Schema.Types.ObjectId, ref: 'worldculturesandglobalissuescourses', required: true},
+            course: {type: mongoose.Schema.Types.ObjectId, ref: 'courses', required: true},
             grade:{type: Number, require: true},
             required: false
         }

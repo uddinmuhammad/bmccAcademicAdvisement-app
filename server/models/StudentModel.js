@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const db = require('../database.js');
 
-// const Schema = mongoose.Schema;
-
 const StudentSchema = mongoose.Schema({
     emplId: {
         type: Number,

@@ -7,14 +7,10 @@ var CoursesTakenRouter = express.Router();
 
 async function getMajorTakenCourses(courses){
     let takenCourses;
-
         takenCourses = courses.filter(course => course.grade < 13);
         return takenCourses;
 
 }
-
-
-
 
 
 CoursesTakenRouter.get('/coursesTaken', async (req, res) => {

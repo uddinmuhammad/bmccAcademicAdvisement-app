@@ -2,90 +2,79 @@
 const express = require('express');
 const Courses = require('../models/CourseModel');
 const StudentCourses = require('../models/StudentCoursesModel');
+const courseServices = require('../services/CourseService')
 
 var coursesNextSemesterRouter = express.Router();
 
-let courses = [
-    {id: 1,
-        title: "Introdustion to programming",
-        code: "CSC-111",
-        credits: 3,
-        crucial: true,
-        important: false,
-        shouldTake: false
-    },
-    {id: 2,
-        title: "Analytics Geometry & Calculus I",
-        code: "MAT-301",
-        credits: 4,
-        crucial: true,
-        important: false,
-        shouldTake: false
-    },
-    {id: 3,
-        title: "Introduction to Literature",
-        code: "ENG-201",
-        credits: 3,
-        crucial: false,
-        important: true,
-        shouldTake: false
-    },
-    {id: 4,
-        title: "Fundamentals of Public Speaking",
-        code: "SPE-100",
-        credits: 3,
-        crucial: false,
-        important: true,
-        shouldTake: false
-    },
-    {id: 5,
-        title: "U.S. Experience in Its Diversity",
-        code: "XXX-xxx",
-        credits: 4,
-        crucial: false,
-        important: false,
-        shouldTake: true
+function checkEnglishCourses(courses){
+    if(courses.length == 1)
+        return({...courses[0], important: true})
+    else if(courses.length > 1)
+        return({...courses[0], crucial: true})
+    else 
+        return courses
+}
+
+function checkFlexCourses(courses) {
+    if(courses.length >= 1){
+        if(courses[0].creativeExpression){
+            return{
+                title: "Creative Expretion Course",
+                shouldTake: true,
+                credits: "3 Credits Needed"
+            }
+        }
+        else if(courses[0].individualAndSociety){
+            return{
+                title: "Individual And Society Courses",
+                shouldTake: true,
+                credits: "3 Credits Needed"
+            }
+        }
+        else if(courses[0].usExperienceInItsDiversity){
+            return{
+                title: "Us Experience In Its Diversity Courses",
+                shouldTake: true,
+                credits: "3 Credits Needed"
+            }
+        }
+        else if(courses[0].worldCulturesAndGlobalIssues){
+            return{
+                title: "World Cultures And Global Issues Courses",
+                shouldTake: true,
+                credits: "3 Credits Needed"
+            }
+        }
     }
-]
-
-
+    else if(courses.length == 0)
+            return noCoursesNeeded = [];
+            
+    else return courses;
+    
+}
 
 
 coursesNextSemesterRouter.get('/coursesNextSemester', async (req, res) => {
     const student = await StudentCourses.findOne({"student": '607e853523cd756ff31227d5'});
 
-    const majorCourses = student.courses;
+
+    const nextSemesterMajorCourses = await courseServices.getNextSemesterCourses(await courseServices.getMajorCourses(student.courses));
+    const nextSemesterEnglishCourse = await checkEnglishCourses(await courseServices.getEnglishCourses(student.englishCourses));
     
-    untakenMajorCourses = majorCourses.filter(course => course.grade >= 9 && course.grade != 14);
+    const CreativeExpretionCourses =  checkFlexCourses(await courseServices.getFlexCourses(student.creativeExpressionCourses));
+    const individualAndSocietyCourses =  checkFlexCourses(await courseServices.getFlexCourses(student.individualAndSocietyCourses));
+    const usExperienceInItsDiversityCourses =  checkFlexCourses(await courseServices.getFlexCourses(student.usExperienceInItsDiversityCourses));
+    const worldCulturesAndGlobalIssuesCourses =  checkFlexCourses(await courseServices.getFlexCourses(student.worldCulturesAndGlobalIssuesCourses));
+    
 
-    const coursesDetails = [];
-    const c = {crucial: true};
+    const nextSemesterCourses = nextSemesterMajorCourses.concat(nextSemesterEnglishCourse)
+    .concat(CreativeExpretionCourses)
+    .concat(individualAndSocietyCourses)
+    .concat(usExperienceInItsDiversityCourses)
+    .concat(worldCulturesAndGlobalIssuesCourses);
 
-    for(course of untakenMajorCourses){
-        coursesDetails.push(await Courses.findById(course.course));
-    }
-
-    // for(course of coursesDetails){
-    //     course = {...course, ...c};
-    //     //console.log(course)
-    //     course.save();
-    // }
-
-    var result = coursesDetails.map(function(el) {
-        var o = Object.assign({}, el);
-        o.crucial = true;
-        return o;
-      })
-      
-    //   console.log(coursesDetails);
-    //   console.log(result);
-
-
-    res.json(result)
-     //console.log(coursesDetails);
-
+    res.json(nextSemesterCourses);
 });
 
-// export default coursesNextSemesterRouter;
 
 module.exports = coursesNextSemesterRouter;
