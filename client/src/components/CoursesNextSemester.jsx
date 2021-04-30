@@ -78,7 +78,15 @@ export default class CoursesNextSemester extends Component {
                         <h6>{course.title} - <i>{course.credits}</i></h6>
                     </div>
                 ))}
-                </div>               
+                {this.state.courses.filter(course => course.programElective).map(course => (
+                    <div key={course.id}>
+                        <h6>{course._doc.title} - <i>{course._doc.credits}</i></h6>
+                    </div>
+                ))}
+
+                
+                </div>
+                               
             </div>
         )
     }

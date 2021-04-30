@@ -6,12 +6,18 @@ const StudentCourses = require('../models/StudentCoursesModel');
 
 
 CoursesCurrentRouter.get('/CoursesCurrent', async (req, res) => {
-  const student = await StudentCourses.findOne({"student": '607e853523cd756ff31227d5'})
+  const student = await StudentCourses.findOne({"student": '6088e09d34934fa514246b56'})
 
   if(!student) res.json('there is no student')
   else{
-      const courses = student.courses;
-      const takingCourses = courses.filter(course => course.grade > 13);
+      const courses = (student.courses)
+        .concat(student.englishCourses)
+        .concat(student.creativeExpressionCourses)
+        .concat(student.individualAndSocietyCourses)
+        .concat(student.usExperienceInItsDiversityCourses)
+        .concat(student.worldCulturesAndGlobalIssuesCourses)
+        .concat(student.programElectiveCourses)
+      const takingCourses = courses.filter(course => course.grade == 14);
 
 
       const coursesDetails = [] 

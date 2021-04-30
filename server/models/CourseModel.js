@@ -20,49 +20,34 @@ const courseSchema = new mongoose.Schema({
         required: false,
         // enum: ['CS', 'CIS']
     },
-    CIS:{
-        type: Boolean,
-        required: false,
-    },
-    CNT:{
-        type: Boolean,
-        required: false,
-    },
-    CS:{
-        type: Boolean,
-        required: false,
-    },
-    GIS:{
-        type: Boolean,
-        required: false,
-    },
     preReq:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'courses',
         required: false
     }],
+    alternativePreReq:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'courses',
+        required: false
+    },
     coReq:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'courses',
         required: false
     }],
-    englishComp:{
+    courseType:{
+        type: Array,
+        required: false,
+    },
+    CSProgramElective: {
         type: Boolean,
         required: false,
     },
-    creativeExpression: {
+    CISProgramElective: {
         type: Boolean,
         required: false,
     },
-    individualAndSociety: {
-        type: Boolean,
-        required: false,
-    },
-    usExperienceInItsDiversity: {
-        type: Boolean,
-        required: false,
-    },
-    worldCulturesAndGlobalIssues: {
+    CNTProgramElective: {
         type: Boolean,
         required: false,
     },

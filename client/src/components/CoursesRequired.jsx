@@ -14,7 +14,8 @@ export default class CoursesRequired extends Component {
                     CNT: false,
                     CS: false,
                     GIS: false,
-                    englishComp: false,
+                    major: [],
+                    courseType: [],
                     creativeExpression: false,
                     individualAndSociety: false,
                     usExperienceInItsDiversity: false,
@@ -22,6 +23,12 @@ export default class CoursesRequired extends Component {
                 }
             ]
         };
+
+    getMajors = () =>{
+        const majors = 'CSProgramElective';
+
+        return majors;
+    }
 
     componentDidMount = () => {
 
@@ -36,6 +43,8 @@ export default class CoursesRequired extends Component {
     
     }
 
+
+
     render() {
         // console.log("classes needed Rendered    " + JSON.stringify(this.state.Courses));
         // const {individualAnSocietyCourses} = {this.getIndividualAndSociety};
@@ -44,7 +53,7 @@ export default class CoursesRequired extends Component {
 
                 <div>
                     <h5>Major Courses</h5>
-                    {this.state.courses.filter(course => course.CIS || course.CNT || course.CS || course.GIS).map(course => (
+                    {this.state.courses.filter(course => course.major.includes("CS", 'CIS', 'CNT', 'GIS')).map(course => (
                         <div key={course.id}>
                             {course.title} - {course.code} - {course.credits}
                         </div>
@@ -52,7 +61,7 @@ export default class CoursesRequired extends Component {
                 </div>
                 <div>
                     <h5>English Composition</h5>
-                    {this.state.courses.filter(course => course.englishComp).map(course => (
+                    {this.state.courses.filter(course => course.courseType.includes("englishComposition")).map(course => (
                         <div key={course.id}>
                         {course.title} - {course.code} - {course.credits}
                     </div>
@@ -60,8 +69,8 @@ export default class CoursesRequired extends Component {
                 </div>
                 <div>
                     <h5>Creative Expression Courses</h5>
-                    <i>(Taken one of the following course)</i>
-                    {this.state.courses.filter(course => course.creativeExpression).map(course => (
+                    <i>(Take one of the following course)</i>
+                    {this.state.courses.filter(course => course.courseType.includes("creativeExpression")).map(course => (
                         <div key={course.id}>
                         {course.title} - {course.code} - {course.credits}
                     </div>
@@ -69,8 +78,8 @@ export default class CoursesRequired extends Component {
                 </div>
                 <div>
                     <h5>Individual And Society Courses</h5>
-                    <i>(Taken one of the following course)</i>
-                    {this.state.courses.filter(course => course.individualAndSociety).map(course => (
+                    <i>(Take one of the following course)</i>
+                    {this.state.courses.filter(course => course.courseType.includes("individualAndSociety")).map(course => (
                         <div key={course.id}>
                         {course.title} - {course.code} - {course.credits}
                     </div>
@@ -78,8 +87,8 @@ export default class CoursesRequired extends Component {
                 </div>
                 <div>
                     <h5>U.S Experience In Its Diversity Courses </h5>
-                    <i>(Taken one of the following course)</i>
-                    {this.state.courses.filter(course => course.usExperienceInItsDiversity).map(course => (
+                    <i>(Take one of the following course)</i>
+                    {this.state.courses.filter(course => course.courseType.includes("usExperienceInItsDiversity")).map(course => (
                         <div key={course.id}>
                         {course.title} - {course.code} - {course.credits}
                     </div>
@@ -87,11 +96,21 @@ export default class CoursesRequired extends Component {
                 </div>
                 <div>
                     <h5>World Cultures And Global Issues Courses</h5>
-                    <i>(Taken one of the following course)</i>
-                    {this.state.courses.filter(course => course.worldCulturesAndGlobalIssues).map(course => (
+                    <i>(Take one of the following course)</i>
+                    {this.state.courses.filter(course => course.courseType.includes("worldCulturesAndGlobalIssues")).map(course => (
                         <div key={course.id}>
                         {course.title} - {course.code} - {course.credits}
                     </div>
+                    ))}
+                </div>
+
+                <div>
+                    <h5>Program Electives</h5>
+                    <i>Take atleast 6 credits</i>
+                    {this.state.courses.filter(course => course.courseType.includes("CSProgramElective", "CISProgramElective", "CNTProgramElective", "GISProgramElective")).map(course => (
+                        <div key={course.id}>
+                            {course.title} - {course.code} - {course.credits}
+                        </div>
                     ))}
                 </div>
             

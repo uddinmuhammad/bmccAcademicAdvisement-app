@@ -50,6 +50,13 @@ const studentCoursesSchema = mongoose.Schema({
             required: false
         }
     ],
+    programElectiveCourses:[
+        {
+            course: {type: mongoose.Schema.Types.ObjectId, ref: 'courses', required: true},
+            grade: {type: Number, require: true},
+            required: false
+        }
+    ]
 })
 
 const StudentCourses = mongoose.model('StudentCourse', studentCoursesSchema);
