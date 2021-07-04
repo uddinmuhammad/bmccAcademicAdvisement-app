@@ -208,7 +208,7 @@ async function getNextSemesterCourses(courses){
 
     const preReqCourses = [];
     const preReqsRequired = [];
-    const nextSemesterCoursesByImporatance = [];
+    //const nextSemesterCoursesByImporatance = [];
     const coursesRequired = [];
 
     // get Preq Courses of courses
@@ -222,19 +222,24 @@ async function getNextSemesterCourses(courses){
         }
     }
 
+    //get untaknePreReq to courses
     for(preReqCourse of preReqCourses){
             if(containsCourse(preReqCourse, courses)){preReqsRequired.push(preReqCourse)}
     }
 
+
     for(course of courses){
-        if(!containsCourse(course, coursesRequired)){
+        //if course is not in coursesRequired
+        //if(!containsCourse(course, coursesRequired)){
+
             if(!findIfCommonCourse(preReqsRequired, course.preReq) && containsCourse(course, preReqsRequired)){
                 coursesRequired.push({...course, crucial: true});
             }
+            
             else if(!findIfCommonCourse(course.preReq, preReqsRequired))
                     coursesRequired.push({...course, important: true}) 
             }
-        }
+        //}
 
     return coursesRequired;
 

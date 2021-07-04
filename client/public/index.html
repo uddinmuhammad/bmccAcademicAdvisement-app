@@ -9,6 +9,22 @@
       name="description"
       content="Web site created using create-react-app"
     />
+    <meta>
+    <!-- WATSON CHAT-BOT -->
+      <script>
+        {window.watsonAssistantChatOptions = {
+            integrationID: "c479db5d-49af-46f9-9896-2926c8c5740a", // The ID of this integration.
+            region: "us-south", // The region your integration is hosted in.
+            serviceInstanceID: "7bdb5e12-98f1-4fc8-8e6f-db2f514ada66", // The ID of your service instance.
+            onLoad: function(instance) { instance.render(); }
+          }}
+        {setTimeout(function(){
+          const t=document.createElement('script');
+          t.src="https://web-chat.global.assistant.watson.appdomain.cloud/loadWatsonAssistantChat.js";
+          document.head.appendChild(t);
+        })};
+      </script>
+    <meta/>
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a

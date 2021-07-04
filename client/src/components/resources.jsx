@@ -25,7 +25,6 @@ export default class Resources extends Component {
 
 
     render() {
-        const { tags} = this.state;
 
         return (
             <div className="container" id="resources">

@@ -67,6 +67,36 @@ async function getProgramElectiveCourses(major){
 }
 
 
+async function getElectiveCourses(major){
+
+    let courses = [];
+    const programElectiveCourses = [];
+    
+    //await Courses.find({courseType: "CSProgramElective"})
+    if(String(major) == "CS")
+        courses = await Courses.find({courseType: "CSProgramElective"})
+        //console.log("CS: ",courses);
+
+    else if(major == "CIS")
+        courses = await Courses.find({courseType: "CISProgramElective"})
+    
+    else if(major == "CNT")
+        courses = await Courses.find({courseType: "CNTProgramElective"})
+    
+    else if(major == "GIS")
+        courses.push = await Courses.find({courseType: "GISProgramElective"})
+
+  
+
+    for(let i = 0; i < courses.length; i++){
+        programElectiveCourses.push({course: courses[i]._id, grade: 13})
+        console.log("From Loop #", i,":" ,courses[i]);
+    }
+
+    return programElectiveCourses;
+}
+
+
 exports.addCoursesToStudent = async (req, res) => {
 
 

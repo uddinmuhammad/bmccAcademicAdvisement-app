@@ -46,7 +46,6 @@ export default class CoursesNextSemester extends Component {
 
     render() {
             console.log("Next semester classes Rendered")
-            const {crucials} = (this.getCrucialCourses);
         return (
             <div className="container" id='courses'>
 
@@ -71,9 +70,9 @@ export default class CoursesNextSemester extends Component {
                 </div>
 
                 <div>
-                <h5>Should take these Courses</h5>
+                <h5>May take these Courses</h5>
                 {/* Rendering ShouldTake */}
-                {this.state.courses.filter(course => course.shouldTake).map(course => (
+                {this.state.courses.filter(course => course.shouldTake).map(course => ( 
                     <div key={course.id}>
                         <h6>{course.title} - <i>{course.credits}</i></h6>
                     </div>

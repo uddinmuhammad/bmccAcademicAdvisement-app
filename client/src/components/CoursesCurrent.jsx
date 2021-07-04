@@ -16,6 +16,7 @@ export default class CoursesCurrent extends Component {
       };
 
 
+
   componentDidMount = () => {
 
     var URI = config.base_url+config.courses_current

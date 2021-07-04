@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {Route} from 'react-router-dom'
 import NavBar from './components/navbar.jsx'
 import Resources from './components/resources.jsx'
@@ -22,9 +22,6 @@ function App() {
           <Route path="/courses/taken" component={CoursesTaken} />
           {/* <Route path="/" component={Resources} /> */}
         </div>
-        {/* <MyCourses/>
-        <NextSemesterCourses/>
-        <CoursesNeeded/> */}
         
     </div>
   );
