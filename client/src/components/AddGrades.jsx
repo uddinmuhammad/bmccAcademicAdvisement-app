@@ -1,13 +1,13 @@
 import React, { Component, Fragment, useState, useEffect } from 'react';
 
-const AddGrades = ({course}) => {
+const AddGrades = ({courses}) => {
     // const [grade, setGrade] = useState(course.grade);
 
     // // render() {
     //     const { courses } = this.props;
         return <Fragment>
-            <div>{course}</div>
-{/* <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            {/* <div>{courses}</div> */}
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
   Add Grades
 </button>
 
@@ -37,7 +37,7 @@ const AddGrades = ({course}) => {
 
     </div>
   </div>
-</div> */}
+</div>
         </Fragment>
     }
 //}
