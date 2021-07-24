@@ -1,0 +1,6 @@
+Change class components to functional
+
+use react hooks instead of lifecycle methods
+        useState()
+        useEffect()
+
