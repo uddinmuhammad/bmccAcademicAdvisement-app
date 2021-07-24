@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
+import AddGrades from './AddGrades';
 
 export default class CourseCurrent extends Component {
 
 
     render() {
         const { courses } = this.props;
-
+        // console.log(courses);
         return (
             <div>
             <hr />
@@ -16,6 +17,7 @@ export default class CourseCurrent extends Component {
                   </div>
                 );
               })}
+              
           </div>
         )
     }

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Class from './CourseCurrent';
 import axios from 'axios'
 import config from '../config/app_config.json';
+import AddGrades from './AddGrades';
 
 export default class CoursesCurrent extends Component {
     
@@ -10,7 +11,8 @@ export default class CoursesCurrent extends Component {
           {
             code: "NONE",
             title: "NO MORE COURSE IS Required",
-            credits: 0
+            credits: 0,
+            grade: 14
           }
         ]
       };
@@ -33,10 +35,12 @@ export default class CoursesCurrent extends Component {
 
       render() {
         const { courses} = this.state;
+        console.log("Coming from CoursesCurrent.jsx", courses);
 
         return (
           <div className="container">
             <Class courses={courses} />
+            <AddGrades courses={courses}/>
           </div>
         );
       }

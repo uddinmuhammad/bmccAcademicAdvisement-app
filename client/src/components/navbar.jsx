@@ -7,6 +7,7 @@ export default class NavBar extends Component {
             <nav className="navbar navbar-light bg-primary">
             <div className="container-fluid">
                 <a className="navbar-brand" href="/">Academic Advisment BMCC</a>
+                
             </div>
             </nav>
             </div>
