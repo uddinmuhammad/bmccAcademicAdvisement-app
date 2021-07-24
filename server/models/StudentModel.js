@@ -1,9 +1,7 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
+const db = require('../database.js');
 
-const Schema = mongoose.Schema;
-
-let StudentSchema = new Schema({
-    _id: new Schema.Types.ObjectId,
+const StudentSchema = mongoose.Schema({
     emplId: {
         type: Number,
         required: true
@@ -26,11 +24,10 @@ let StudentSchema = new Schema({
         type: Number,
         required: false
     },
-    
-    // major: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Major'
-    // },
+    major:{
+        type: String,
+        required: true
+    },
     createdOn: {
         type: Date,
         default: Date.now
@@ -42,6 +39,6 @@ let StudentSchema = new Schema({
 
 });
 
-const model = mongoose.model("Student", StudentSchema);
+const Student = mongoose.model("Students", StudentSchema);
 
-module.exports = model;
+module.exports = Student;

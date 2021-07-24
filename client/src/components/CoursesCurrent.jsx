@@ -1,25 +1,32 @@
 import React, { Component } from 'react'
 import Class from './CourseCurrent';
 import axios from 'axios'
+import config from '../config/app_config.json';
+import AddGrades from './AddGrades';
 
 export default class CoursesCurrent extends Component {
     
     state = {
-        coursesCurrent: [
+        courses: [
           {
-            id: 123,
-            title: "NOCOURSE",
-            credits: 3
+            code: "NONE",
+            title: "NO MORE COURSE IS Required",
+            credits: 0,
+            grade: 14
           }
         ]
       };
 
 
+
   componentDidMount = () => {
-      axios.get("/api/CoursesCurrent").then(response => {
+
+    var URI = config.base_url+config.courses_current
+
+      axios.get(URI).then(response => {
           // console.log(response.data);
           this.setState({
-            coursesCurrent: response.data
+            courses: response.data
           })
       })
     }
@@ -27,11 +34,13 @@ export default class CoursesCurrent extends Component {
 
 
       render() {
-        const { coursesCurrent} = this.state;
+        const { courses} = this.state;
+        console.log("Coming from CoursesCurrent.jsx", courses);
 
         return (
           <div className="container">
-            <Class courses={coursesCurrent} />
+            <Class courses={courses} />
+            <AddGrades courses={courses}/>
           </div>
         );
       }

@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
+require('dotenv').config();
 
-const db = 'mongodb+srv://advismentAdmin:Bmcc1234@cluster0.qqxur.mongodb.net/allMajorCourses?retryWrites=true&w=majority';
+const db = process.env.MONGO_URI; 
 
 const connectDB = async () => {
     try{

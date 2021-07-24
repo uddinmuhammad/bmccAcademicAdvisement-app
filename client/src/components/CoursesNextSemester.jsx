@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import config from '../config/app_config.json';
 
 export default class CoursesNextSemester extends Component {
     state = {
         courses:[
             {
+                _doc:{
                 id: 567,
                 title: "NO COURSES Left",
-                credit: 0,
+                credit: 0,},
                 crucial: true,
                 important: true,
                 shouldTake: true
@@ -16,7 +18,9 @@ export default class CoursesNextSemester extends Component {
     };
 
     componentDidMount = () => {
-        axios.get("/api/coursesNextSemester").then(response => {
+        var URI = config.base_url+config.courses_NextSemester;
+
+        axios.get(URI).then(response => {
             // console.log(response.data);
             this.setState({
                 courses: response.data
@@ -42,7 +46,6 @@ export default class CoursesNextSemester extends Component {
 
     render() {
             console.log("Next semester classes Rendered")
-            const {crucials} = (this.getCrucialCourses);
         return (
             <div className="container" id='courses'>
 
@@ -51,7 +54,7 @@ export default class CoursesNextSemester extends Component {
                     <h5>Crucial Courses</h5>
                 {this.state.courses.filter(course => course.crucial).map(course => (
                     <div key={course.id}> 
-                        {course.title} - {course.code} - {course.credits}
+                        {course._doc.title} - {course._doc.code} - {course._doc.credits}
                     </div>
                 ))}
                 </div>
@@ -61,20 +64,28 @@ export default class CoursesNextSemester extends Component {
                 {/* Rendering Importants */}
                 {this.state.courses.filter(course => course.important).map(course => (
                     <div key={course.id}>
-                        {course.title} - {course.code} - {course.credits}
+                        {course._doc.title} - {course._doc.code} - {course._doc.credits}
                     </div>
                 ))}
                 </div>
 
                 <div>
-                <h5>Should take these Courses</h5>
+                <h5>May take these Courses</h5>
                 {/* Rendering ShouldTake */}
-                {this.state.courses.filter(course => course.shouldTake).map(course => (
+                {this.state.courses.filter(course => course.shouldTake).map(course => ( 
                     <div key={course.id}>
-                        {course.title} - {course.code} - {course.credits}
+                        <h6>{course.title} - <i>{course.credits}</i></h6>
                     </div>
                 ))}
-                </div>               
+                {this.state.courses.filter(course => course.programElective).map(course => (
+                    <div key={course.id}>
+                        <h6>{course._doc.title} - <i>{course._doc.credits}</i></h6>
+                    </div>
+                ))}
+
+                
+                </div>
+                               
             </div>
         )
     }

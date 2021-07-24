@@ -1,45 +1,49 @@
-// import express from 'express';
 const express = require('express');
+const Courses = require('../models/CourseModel');
+const StudentCourses = require('../models/StudentCoursesModel');
 
-var coursesTakenRouter = express.Router();
 
-let courses = [
-    {id: 1,
-        title: "Intermediate Algebra and Precalculus",
-        code: "MAT-206.5",
-        credits: 4
-    },
-    {id: 2,
-        title: "English Composition",
-        code: "ENG-101",
-        credits: 3
-    },
-    {id: 3,
-        title: "Principles in Information Technology and Computation",
-        code: "CSC-101",
-        credits: 3
-    },
-    {id: 4,
-        title: "Discrete Structure and Applications to Computer Science",
-        code: "CSC-231",
-        credits: 3
-    },
-    {id: 5,
-        title: "Fundamentals of Computer Systems",
-        code: "CSC-215",
-        credits: 3
-    },
-    {id: 6,
-        title: "Data Structures",
-        code: "CSC-331",
-        credits: 3
+var CoursesTakenRouter = express.Router();
+
+async function getTakenCourses(courses){
+    let takenCourses;
+        takenCourses = courses.filter(course => course.grade < 13);
+        return takenCourses;
+
+}
+
+
+CoursesTakenRouter.get('/coursesTaken', async (req, res) => {
+
+    const student = await StudentCourses.findOne({"student": '6088e09d34934fa514246b56'})
+
+    if(!student) res.json('there is no student')
+    else{
+        const majorCourses = await getTakenCourses(student.courses);
+        const englishCourses =  await getTakenCourses(student.englishCourses);
+        const creativeExpressionCourses = await getTakenCourses(student.creativeExpressionCourses);
+        const individualAndSocietyCourses = await getTakenCourses(student.individualAndSocietyCourses);
+        const usExperienceCourses = await getTakenCourses(student.usExperienceInItsDiversityCourses);
+        const worldCulturesCourses = await getTakenCourses(student.worldCulturesAndGlobalIssuesCourses);
+        const programElectiveCourses = await getTakenCourses(student.programElectiveCourses);
+
+
+        const newUntakenCourses = majorCourses.concat(englishCourses)
+            .concat(creativeExpressionCourses)
+               .concat(individualAndSocietyCourses)
+                   .concat(usExperienceCourses)
+                       .concat(worldCulturesCourses)
+                            .concat(programElectiveCourses);
+
+
+        const coursesDetails = [];
+  
+        for(course of newUntakenCourses){
+            coursesDetails.push(await Courses.findById(course.course));
+        }
+        //console.log("TakenCourses:",coursesDetails)
+        res.json(coursesDetails);
     }
-]
-
-coursesTakenRouter.get('/coursesTaken', (req, res) => {
-    res.json(courses);
 });
 
-// export default coursesTakenRouter;
-
-module.exports = coursesTakenRouter;
+module.exports = CoursesTakenRouter;
